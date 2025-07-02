@@ -1,3 +1,7 @@
+html{
+  background-image: 'imagemfundo.jpg';
+}
+
 body {
   margin: 0;
   background-color: black;
