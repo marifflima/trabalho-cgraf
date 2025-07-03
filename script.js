@@ -2,12 +2,12 @@ const cenas = [
   {
     nome: "Personagem1",
     texto: "Temos um mistério pra resolver.",
-    retrato: "imagens/personagem1.png",
+    retrato: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk2Neda1JwITTEuv-i2s4rHWNTLge5emarXQ&s",
   },
   {
     nome: "Personagem2",
     texto: "Certo, vamos investigar tudo com cuidado!",
-    retrato: "imagens/personagem2.png",
+    retrato: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1n7ABaIZZ9bTfVtLiO-rJKOVoPQc_VuHdXg&s",
    }
 ];
 
