@@ -1,12 +1,7 @@
-html{
+html ,body{
   background-image: "imagens/imagemfundo.png";
-}
-
-
-body {
   margin: 0;
-  background-color: black;
-  font-family: monospace;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #jogo {
@@ -53,5 +48,6 @@ body {
   bottom: 10px;
   right: 10px;
   padding: 8px 12px;
-  font-size: 16px;
+  font-size: 20px;
+  background-color: aquamarine;
 }
