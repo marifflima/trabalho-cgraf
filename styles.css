@@ -1,5 +1,7 @@
 html{
   background-image: "imagens/imagemfundo.jpg";
+  background-size: cover;
+  background-position: center;
 }
 
 body {
