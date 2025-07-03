@@ -3,14 +3,12 @@ const cenas = [
     nome: "Personagem1",
     texto: "Temos um mistério pra resolver.",
     retrato: "imagens/personagem1.png",
-    fundo: "imagens/imagemfundo.jpg"
   },
   {
     nome: "Personagem2",
     texto: "Certo, vamos investigar tudo com cuidado!",
     retrato: "imagens/personagem2.png",
-    fundo: "imagens/imagemfundo.jpg"
-  }
+   }
 ];
 
 let indiceCena = 0;
