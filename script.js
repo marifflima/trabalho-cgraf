@@ -1,14 +1,29 @@
 const cenas = [
   {
-    nome: "Personagem1",
-    texto: "Temos um mistério pra resolver.",
-    retrato: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk2Neda1JwITTEuv-i2s4rHWNTLge5emarXQ&s",
+    nome: "Taylor Swift",
+    texto: "Eu sou a melhor cantora!",
+    retrato: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png/1200px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png",
   },
   {
-    nome: "Personagem2",
-    texto: "Certo, vamos investigar tudo com cuidado!",
-    retrato: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1n7ABaIZZ9bTfVtLiO-rJKOVoPQc_VuHdXg&s",
-   }
+    nome: "QueenB",
+    texto: "Não, eu sou!!",
+    retrato: "https://www.usatoday.com/gcdn/authoring/authoring-images/2025/05/02/USAT/83419857007-006-20250428-cct-la-dakdouk-web.jpg?crop=1018,573,x295,y647&width=660&height=371&format=pjpg&auto=webp",
+   },
+  {
+    nome: "Juíza Olivia",
+    texto: "Ordem no tribunal!!",
+    retrato: "https://s2-quem.glbimg.com/UphChr6TuKtExSXPu0Pr1By7eMI=/0x0:1400x950/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/1/1/hRNpMMSpe7zbtbfbXPIA/olivia-rodrigo.jpg",
+  },
+  {
+    nome: "Juiza OLivia",
+    texto: "Advogada da Senhora Taylor, se pronuncie",
+    retrato: "https://s2-quem.glbimg.com/UphChr6TuKtExSXPu0Pr1By7eMI=/0x0:1400x950/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/1/1/hRNpMMSpe7zbtbfbXPIA/olivia-rodrigo.jpg",
+  },
+  {
+    nome: "Sabrina",
+    texto: "Boa tarde, juiza, sou a advogada da senhora Taylor Swift",
+    retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg",
+  }
 ];
 
 let indiceCena = 0;
