@@ -18,6 +18,110 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+
+const cenas = [
+  {
+    nome: "Taylor Swift",
+    texto: "Eu sou a melhor cantora!",
+    retrato: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png/1200px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png",
+    button: "false"
+  },
+  {
+    nome: "QueenB",
+    texto: "Não, eu sou!!",
+    retrato: "https://www.usatoday.com/gcdn/authoring/authoring-images/2025/05/02/USAT/83419857007-006-20250428-cct-la-dakdouk-web.jpg?crop=1018,573,x295,y647&width=660&height=371&format=pjpg&auto=webp",
+    button: ""
+  },
+  {
+    nome: "Juíza Olivia",
+    texto: "Ordem no tribunal!!",
+    retrato: "https://s2-quem.glbimg.com/UphChr6TuKtExSXPu0Pr1By7eMI=/0x0:1400x950/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/1/1/hRNpMMSpe7zbtbfbXPIA/olivia-rodrigo.jpg",
+  },
+  {
+    nome: "Juiza OLivia",
+    texto: "Advogada da Senhora Taylor, se pronuncie",
+    retrato: "https://s2-quem.glbimg.com/UphChr6TuKtExSXPu0Pr1By7eMI=/0x0:1400x950/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/1/1/hRNpMMSpe7zbtbfbXPIA/olivia-rodrigo.jpg",
+  },
+  {
+    nome: "Sabrina",
+    texto: "Boa tarde, juiza, sou a advogada da senhora Taylor Swift",
+    retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg",
+    button: "true"
+  }
+];
+
+let indiceCena = 0;
+
+const nomeEl = document.getElementById("nome");
+const textoEl = document.getElementById("texto");
+const retratoEl = document.getElementById("retrato");
+const fundoEl = document.getElementById("fundo");
+const btnProximo = document.getElementById("proximo");
+
+function mostrarCena() {
+  const cena = cenas[indiceCena];
+  nomeEl.textContent = cena.nome;
+  textoEl.textContent = cena.texto;
+  retratoEl.src = cena.retrato;
+  fundoEl.src = cena.fundo;
+}
+
+btnProximo.addEventListener("click", () => {
+  indiceCena++;
+  if (indiceCena < cenas.length) {
+    mostrarCena();
+  } else {
+    textoEl.textContent = "Fim da demo.";
+    btnProximo.disabled = true;
+  }
+});
+
+ // Função para simular a requisição GET
+ function getCenas() {
+  return new Promise((resolve) => {
+                // Simula um atraso de rede (opcional)
+  setTimeout(() => {
+    resolve(cenas); // Retorna os dados da constante 'cenas'
+  }, 500);
+  });
+}
+
+        // Função para exibir as cenas na página
+  async function exibirCenas() {
+    const listaCenasDiv = document.getElementById('listaCenas');
+    listaCenasDiv.innerHTML = 'Carregando cenas...';
+
+try {
+  const dadosCenas = await getCenas(); // Simula a requisição GET
+    listaCenasDiv.innerHTML = ''; // Limpa a mensagem de carregamento
+
+  dadosCenas.forEach(cena => {
+    const sceneDiv = document.createElement('div');
+      sceneDiv.classList.add('scene');
+
+sceneDiv.innerHTML = `
+  <img src="${cena.retrato}" alt="${cena.nome}">
+  <div class="scene-details">
+    <h3>${cena.nome}</h3>
+    <p>${cena.texto}</p>
+  </div>
+`;
+  listaCenasDiv.appendChild(sceneDiv);
+});
+} catch (error) {
+  listaCenasDiv.innerHTML = `<p style="color: red;">Ocorreu um erro ao carregar as cenas: ${error.message}</p>`;
+  }
+}
+
+        // Adiciona um listener ao botão para carregar as cenas
+document.getElementById('carregarCenas').addEventListener('click', exibirCenas);
+
+        // Opcional: Carregar cenas automaticamente ao carregar a página
+        // window.onload = exibirCenas;
+
+mostrarCena();
+
+  </script>
 </body>
 </html>
