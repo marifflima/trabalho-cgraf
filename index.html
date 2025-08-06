@@ -14,6 +14,7 @@
         <p id="nome">Personagem</p>
         <p id="texto">Texto do diálogo vai aqui.</p>
       </div>
+      <div id="opções" class="opções"></div>
       <button id="proximo">Próximo</button>
     </div>
   </div>
@@ -47,8 +48,32 @@ const cenas = [
     nome: "Sabrina",
     texto: "Boa tarde, juiza, sou a advogada da senhora Taylor Swift",
     retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg",
-    button: "true"
-  }
+    opções: [
+    {
+        texto: "Apresentar Evidência",
+        acao: () => escolherCena(6)  
+    },
+    {
+        texto: "Apresentar Evidência",
+        acao: () => escolherCena(7)  
+    }
+    ]
+  },
+  {
+    nome: "Sabrina",
+    texto: "Essa é a Evidência",
+    retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg"
+  },
+  {
+    nome: "Sabrina",
+    texto: "Essa é a Objeção",
+    retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg"
+  },   
+  { 
+    nome: "OLivia",
+    texto: "!!!!!!!!!!!!!!!!!",
+    retrato: "https://s2-quem.glbimg.com/UphChr6TuKtExSXPu0Pr1By7eMI=/0x0:1400x950/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/1/1/hRNpMMSpe7zbtbfbXPIA/olivia-rodrigo.jpg"
+  },
 ];
 
 let indiceCena = 0;
@@ -58,6 +83,7 @@ const textoEl = document.getElementById("texto");
 const retratoEl = document.getElementById("retrato");
 const fundoEl = document.getElementById("fundo");
 const btnProximo = document.getElementById("proximo");
+const opçõesEl = document.getElementById("opções");
 
 function mostrarCena() {
   const cena = cenas[indiceCena];
@@ -77,20 +103,11 @@ btnProximo.addEventListener("click", () => {
   }
 });
 
- // Função para simular a requisição GET
- function getCenas() {
-  return new Promise((resolve) => {
-                // Simula um atraso de rede (opcional)
-  setTimeout(() => {
-    resolve(cenas); // Retorna os dados da constante 'cenas'
-  }, 500);
-  });
-}
-
         // Função para exibir as cenas na página
   async function exibirCenas() {
     const listaCenasDiv = document.getElementById('listaCenas');
     listaCenasDiv.innerHTML = 'Carregando cenas...';
+  }
 
 try {
   const dadosCenas = await getCenas(); // Simula a requisição GET
@@ -109,10 +126,19 @@ sceneDiv.innerHTML = `
 `;
   listaCenasDiv.appendChild(sceneDiv);
 });
-} catch (error) {
-  listaCenasDiv.innerHTML = `<p style="color: red;">Ocorreu um erro ao carregar as cenas: ${error.message}</p>`;
-  }
 }
+
+function escolherCena(indiceCenaEscolhida) {
+  // Monta uma nova sequência a partir da escolha
+  // Pula as cenas não escolhidas (como 6 ou 7, dependendo da escolha)
+
+  const cenasRestantes = cenas.slice(indiceCenaEscolhida + 1);
+  sequenciaCenas = [indiceCenaEscolhida, ...cenasRestantes.map((_, i) => indiceCenaEscolhida + 1 + i)];
+
+  indiceCena = 0;
+  mostrarCena();
+}
+
 
         // Adiciona um listener ao botão para carregar as cenas
 document.getElementById('carregarCenas').addEventListener('click', exibirCenas);
