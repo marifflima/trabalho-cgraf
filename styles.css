@@ -67,3 +67,7 @@ html , body{
   height: 70px;
   color: white;
 }
+
+#evidence{
+  display: none;
+}
