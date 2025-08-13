@@ -14,7 +14,10 @@
         <p id="nome">Personagem</p>
         <p id="texto">Texto do diálogo vai aqui.</p>
       </div>
-      <div id="opções" class="opções"></div>
+      <div id="opções" class="opções">
+        <button id="evidence" class="evidence">ola </button>
+        <button id="objection"></button>
+      </div>
       <button id="proximo">Próximo</button>
     </div>
   </div>
@@ -48,7 +51,7 @@ const cenas = [
     nome: "Sabrina",
     texto: "Boa tarde, juiza, sou a advogada da senhora Taylor Swift",
     retrato: "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2025/03/06185618/Sabrina-Carpenter-previa-nova-musica.jpg",
-    opções: [
+    options: [
     {
         texto: "Apresentar Evidência",
         acao: () => escolherCena(6)  
@@ -77,22 +80,36 @@ const cenas = [
 ];
 
 let indiceCena = 0;
+let sequenciaCenas = [];
+let cena = []; // Aqui você deve carregar as cenas antes de usar
 
 const nomeEl = document.getElementById("nome");
 const textoEl = document.getElementById("texto");
 const retratoEl = document.getElementById("retrato");
 const fundoEl = document.getElementById("fundo");
 const btnProximo = document.getElementById("proximo");
-const opçõesEl = document.getElementById("opções");
 
+const opçõesEl = document.getElementById("opções");
+const evidence = document.getElementById("evidence");
+const objection = document.getElementById("objection");
+
+const listaCenasDiv = document.getElementById("listaCenas");
+
+// Função para mostrar a cena atual
 function mostrarCena() {
   const cena = cenas[indiceCena];
+  if (!cena) return;
   nomeEl.textContent = cena.nome;
   textoEl.textContent = cena.texto;
   retratoEl.src = cena.retrato;
   fundoEl.src = cena.fundo;
+
+  if (cena.options){
+    document.getElementById("evidence").style.display = "block"
+  }
 }
 
+// Botão "Próximo"
 btnProximo.addEventListener("click", () => {
   indiceCena++;
   if (indiceCena < cenas.length) {
@@ -103,50 +120,54 @@ btnProximo.addEventListener("click", () => {
   }
 });
 
-        // Função para exibir as cenas na página
-  async function exibirCenas() {
-    const listaCenasDiv = document.getElementById('listaCenas');
-    listaCenasDiv.innerHTML = 'Carregando cenas...';
+// Função para exibir lista de cenas na tela
+async function exibirCenas() {
+  listaCenasDiv.innerHTML = "Carregando cenas...";
+  try {
+    const dadosCenas = await getCenas(); // Função que retorna um array de cenas
+    listaCenasDiv.innerHTML = "";
+    cenas = dadosCenas; // Salva as cenas carregadas
+
+    dadosCenas.forEach(cena => {
+      const sceneDiv = document.createElement("div");
+      sceneDiv.classList.add("scene");
+
+      sceneDiv.innerHTML = `
+        <img src="${cena.retrato}" alt="${cena.nome}">
+        <div class="scene-details">
+          <h3>${cena.nome}</h3>
+          <p>${cena.texto}</p>
+        </div>
+      `;
+      listaCenasDiv.appendChild(sceneDiv);
+    });
+
+    // Mostra a primeira cena carregada
+    indiceCena = 0;
+    mostrarCena();
+  } catch (error) {
+    listaCenasDiv.innerHTML = "Erro ao carregar cenas.";
+    console.error(error);
   }
-
-try {
-  const dadosCenas = await getCenas(); // Simula a requisição GET
-    listaCenasDiv.innerHTML = ''; // Limpa a mensagem de carregamento
-
-  dadosCenas.forEach(cena => {
-    const sceneDiv = document.createElement('div');
-      sceneDiv.classList.add('scene');
-
-sceneDiv.innerHTML = `
-  <img src="${cena.retrato}" alt="${cena.nome}">
-  <div class="scene-details">
-    <h3>${cena.nome}</h3>
-    <p>${cena.texto}</p>
-  </div>
-`;
-  listaCenasDiv.appendChild(sceneDiv);
-});
 }
 
+// Escolher uma cena específica e pular as outras
 function escolherCena(indiceCenaEscolhida) {
-  // Monta uma nova sequência a partir da escolha
-  // Pula as cenas não escolhidas (como 6 ou 7, dependendo da escolha)
-
   const cenasRestantes = cenas.slice(indiceCenaEscolhida + 1);
-  sequenciaCenas = [indiceCenaEscolhida, ...cenasRestantes.map((_, i) => indiceCenaEscolhida + 1 + i)];
-
+  sequenciaCenas = [
+    indiceCenaEscolhida,
+    ...cenasRestantes.map((_, i) => indiceCenaEscolhida + 1 + i)
+  ];
   indiceCena = 0;
   mostrarCena();
 }
 
+// Evento para carregar cenas
+document.getElementById("carregarCenas").addEventListener("click", exibirCenas);
 
-        // Adiciona um listener ao botão para carregar as cenas
-document.getElementById('carregarCenas').addEventListener('click', exibirCenas);
+// Opcional: carregar cenas ao abrir a página
+// window.onload = exibirCenas;
 
-        // Opcional: Carregar cenas automaticamente ao carregar a página
-        // window.onload = exibirCenas;
-
-mostrarCena();
 
   </script>
 </body>
